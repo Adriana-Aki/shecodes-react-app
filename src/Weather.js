@@ -5,7 +5,7 @@ export default function Weather() {
   return (
     <div>
       <body>
-        <div class="weather-app">
+        <div className="weather-app">
           <header>
             <form id="search-form">
               <input
