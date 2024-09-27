@@ -39,16 +39,16 @@ export default function Weather() {
           <footer>
             <p>
               This project was coded by
-              <a href="#" target="_blank">
+              <a href="https://portfolio-adrianaj.netlify.app/" target="_blank">
                 Adriana Janockova
               </a>{" "}
               and is
-              <a href="#" target="_blank">
+              <a href="https://portfolio-adrianaj.netlify.app/" target="_blank">
                 {" "}
                 on GitHub
               </a>{" "}
               and
-              <a href="#" target="_blank">
+              <a href="https://portfolio-adrianaj.netlify.app/" target="_blank">
                 hosted on Netlify
               </a>
             </p>
