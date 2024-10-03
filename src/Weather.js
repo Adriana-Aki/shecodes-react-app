@@ -8,31 +8,51 @@ export default function Weather() {
         <div className="weather-app">
           <header>
             <form id="search-form">
-              <input
-                type="search"
-                placeholder="Enter a city.."
-                required
-                class="search-input"
-                id="search-input"
-              />
-              <input type="submit" value="Search" class="search-button" />
+              <div className="row">
+                <div className="col-9">
+                  <input
+                    type="search"
+                    placeholder="Enter a city.."
+                    required
+                    className="search-input"
+                    id="search-input"
+                  />
+                </div>
+                <div className="col-3">
+                  <input
+                    type="submit"
+                    value="Search"
+                    className="search-button"
+                  />
+                </div>
+              </div>
             </form>
           </header>
           <main>
-            <div class="current-weather">
-              <div>
-                <h1 class="current-city" id="current-city">
-                  Paris
-                </h1>
-                <p class="current-details">
-                  <span id="current-date"></span>, moderate rain <br />
-                  Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
-                </p>
-              </div>
-              <div class="current-temperature">
-                <span class="current-temperature-icon">☀️</span>
-                <span class="current-temperature-value">24</span>
-                <span class="current-temperature-unit">°C</span>
+            <div className="current-weather">
+              <div className="row">
+                <div className="col-8">
+                  <h1 className="current-city" id="current-city">
+                    Paris
+                  </h1>
+                  <div class="current-temperature">
+                    <span class="current-temperature-icon">☀️</span>
+                    <span class="current-temperature-value">24</span>
+                    <span class="current-temperature-unit">°C</span>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <ul className="current-details">
+                    <li id="current-date">datum</li>
+                    <li> moderate rain</li>
+                    <li>
+                      Humidity: <strong>87%</strong>
+                    </li>
+                    <li>
+                      Wind: <strong>7.2km/h</strong>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </main>
