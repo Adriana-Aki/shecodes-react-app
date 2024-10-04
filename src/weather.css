@@ -1,6 +1,14 @@
+html,
 body {
-  background: #f9f7fe;
+  height: 100%;
+  margin: 0; /* Ensure there are no margins on the body */
+}
+
+body {
+  background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  background-repeat: no-repeat;
   font-family: "Roboto", sans-serif;
+  height: 100%;
 }
 
 a {
@@ -10,7 +18,8 @@ a {
 .weather-app {
   background: white;
   max-width: 600px;
-  margin: 60px auto;
+  margin: auto;
+  margin-top: 60px;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
@@ -32,15 +41,19 @@ header {
 }
 .search-button {
   font-size: 16px;
-  background-color: #885df1;
-  color: white;
+  background-color: #b0e1f8;
+  color: rgba(39, 33, 66, 0.8);
   border: none;
   padding: 20px;
-
   border-radius: 5px;
+  width: 100%;
 }
 main {
   padding: 30px 0;
+}
+
+ul {
+  margin: 0;
 }
 
 .current-temperature {
@@ -48,15 +61,33 @@ main {
 }
 
 .current-city {
-  font-size: 38px;
+  font-size: 50px;
   font-weight: 900;
-  margin: 0;
+  margin-bottom: 0;
 }
+
+.weather-info {
+  border-top: 1px solid #f9f7fe;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.current-info {
+  color: rgba(39, 33, 66, 0.7);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  list-style-type: none;
+  padding: 0;
+}
+
 .current-details {
   color: rgba(39, 33, 66, 0.4);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  list-style-type: none;
+  padding: 0;
 }
 
 .current-details strong {
@@ -67,24 +98,27 @@ main {
   position: relative;
   top: -8px;
   font-size: 40px;
-  margin-right: 10px;
 }
 
 .current-temperature-value {
-  font-size: 80px;
+  font-size: 55px;
   font-weight: bold;
 }
 
 .current-temperature-unit {
-  font-size: 28px;
-  position: relative;
-  top: -38px;
+  font-size: 55px;
+  font-weight: bold;
 }
 
 footer {
-  border-top: 1px solid #f9f7fe;
   text-align: center;
   padding-top: 15px;
-
   color: rgba(39, 33, 66, 0.4);
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .search-button {
+    margin-top: 10px;
+  }
 }
