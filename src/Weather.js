@@ -1,34 +1,17 @@
 import React, { useState } from "react";
-import "./weather.css";
+import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
 
-export default function Weather() {
-  let [city, setCity] = useState("Barcelona");
-  let [temp, setTemp] = useState("");
-  let [desc, setDesc] = useState("");
-  let [hum, setHum] = useState("");
-  let [wind, setWind] = useState("");
-  let [icon, setIcon] = useState("");
+export default function Weather(props) {
+  let [weatherData, setWeatherData] = useState({ ready: false });
+  let [city, setCity] = useState(props.defaultCity);
+  console.log(city);
 
-  function handleClick(event) {
-    event.preventDefault();
+  function search() {
     let units = "metric";
-    let apiKey = "b2a5adcct04b33178913oc335f405433";
+    let apiKey = "a62bt3c87f1eoc3b004febcaf4a111f5";
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(displayCurrentInfo);
-    // console.log(apiUrl);
-    // axios.get(apiUrl).then(showTemperature);
-  }
-
-  function displayCurrentInfo(response) {
-    console.log(response);
-    setTemp(response.data.temperature.current);
-    setHum(response.data.temperature.humidity);
-    setDesc(response.data.condition.description);
-    setWind(response.data.wind.speed);
-    setIcon(
-      `<img src="${response.data.condition.icon_url}" className="weather-app-icon" />`
-    );
   }
 
   function updateCity(event) {
@@ -36,94 +19,98 @@ export default function Weather() {
     setCity(event.target.value);
   }
 
-  return (
-    <body>
-      <div className="weather-app">
-        <header>
-          <form id="search-form">
-            <div className="row">
-              <div className="col-md-9">
-                <input
-                  type="search"
-                  placeholder="Enter a city.."
-                  required
-                  className="search-input"
-                  id="search-input"
-                  onChange={updateCity}
-                />
-              </div>
-              <div className="col-md-3">
-                <input
-                  type="submit"
-                  value="Search"
-                  className="search-button"
-                  onClick={handleClick}
-                />
-              </div>
-            </div>
-          </form>
-        </header>
-        <main>
-          <div className="current-weather">
-            <h1 className="current-city" id="current-city">
-              {city}
-            </h1>
-            <ul className="current-info">
-              <li id="current-date">datum</li>
-              <li id="description">{desc}</li>
-            </ul>
-            <div className="row align-items-center weather-info">
-              <div className="col-md-8 align-self-center">
-                <div class="current-temperature ">
-                  <span className="current-temperature-icon">{icon}</span>
-                  <span className="current-temperature-value">
-                    {Math.round(temp)}
-                  </span>
-                  <span className="current-temperature-unit">°C</span>
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function displayCurrentInfo(response) {
+    console.log(response);
+    setWeatherData({
+      ready: true,
+      city: response.data.city,
+      temp: response.data.temperature.current,
+      hum: response.data.temperature.humidity,
+      desc: response.data.condition.description,
+      wind: response.data.wind.speed,
+      icon: response.data.condition.icon_url,
+      date: new Date(response.data.time * 1000),
+      icon: response.data.condition.icon_url,
+    });
+  }
+  console.log(weatherData);
+  if (weatherData.ready) {
+    return (
+      <div>
+        <div className="weather-app">
+          <header>
+            <form id="search-form" onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="col-md-9">
+                  <input
+                    type="search"
+                    placeholder="Enter a city.."
+                    required
+                    className="search-input"
+                    id="search-input"
+                    onChange={updateCity}
+                  />
+                </div>
+                <div className="col-md-3">
+                  <input
+                    type="submit"
+                    value="Search"
+                    className="search-button"
+                  />
                 </div>
               </div>
-              <div className="col-md-4 align-self-center">
-                <ul className="current-details">
-                  <li>
-                    Humidity: <strong>{hum}%</strong>
-                  </li>
-                  <li>
-                    Wind: <strong>{wind}km/h</strong>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            </form>
+          </header>
+          <div>
+            <WeatherInfo data={weatherData} />
           </div>
-        </main>
+        </div>
+        <footer>
+          {" "}
+          <p>
+            {" "}
+            This project was coded by{" "}
+            <a
+              href="https://portfolio-adrianaj.netlify.app/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {" "}
+              Adriana Janockova{" "}
+            </a>{" "}
+            and is on{" "}
+            <a
+              href="https://portfolio-adrianaj.netlify.app/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {" "}
+              GitHub{" "}
+            </a>{" "}
+            and hosted on{" "}
+            <a
+              href="https://portfolio-adrianaj.netlify.app/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {" "}
+              Netlify{" "}
+            </a>{" "}
+          </p>{" "}
+        </footer>
       </div>
-      <footer>
-        <p>
-          This project was coded by{" "}
-          <a
-            href="https://portfolio-adrianaj.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Adriana Janockova
-          </a>{" "}
-          and is on{" "}
-          <a
-            href="https://portfolio-adrianaj.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>{" "}
-          and hosted on{" "}
-          <a
-            href="https://portfolio-adrianaj.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Netlify
-          </a>
-        </p>
-      </footer>
-    </body>
-  );
+    );
+  } else {
+    search();
+    return (
+      <div className="loading">
+        <h1>"Loading..."</h1>
+      </div>
+    );
+  }
 }
