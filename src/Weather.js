@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import WeatherInfo from "./WeatherInfo";
+import Forecast from "./Forecast";
 import axios from "axios";
 
 export default function Weather(props) {
@@ -38,6 +39,8 @@ export default function Weather(props) {
     });
   }
   console.log(weatherData);
+  console.log("weatherData.city");
+  console.log(weatherData.city);
   if (weatherData.ready) {
     return (
       <div>
@@ -67,6 +70,7 @@ export default function Weather(props) {
           </header>
           <div>
             <WeatherInfo data={weatherData} />
+            <Forecast forecastCity={weatherData.city} />
           </div>
         </div>
         <footer>
